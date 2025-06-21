@@ -1,0 +1,20 @@
+username,display_name,email,phone,assigned_tags
+sitting.bull,Sitting Bull,sitting.bull@redrocks.org,555-040-0001,ADM
+thousand.doors,Thousand Doors,thousand.doors@redrocks.org,555-040-0002,HR
+crazy.horse,Crazy Horse,crazy.horse@redrocks.org,555-040-0003,ENG
+captain.jack,Captain Jack,captain.jack@redrocks.org,555-040-0004,IT
+john.horse,John Horse,john.horse@redrocks.org,555-040-0005,"IT, ENG"
+little.turkey,Little Turkey,little.turkey@redrocks.org,555-040-0006,"ADM, HR, ENG"
+lone.wolf,Lone Wolf,lone.wolf@redrocks.org,555-040-0007,ADM
+red.cloud,Red Cloud,red.cloud@redrocks.org,555-040-0008,"IT, ENG, ADM, HR"
+john.watts,John Watts,john.watts@redrocks.org,555-040-0009,"ADM, ENG"
+dragging.canoe,Dragging Canoe,dragging.canoe@redrocks.org,555-040-0010,"ADM, HR "
+standing.bear,Standing Bear,standing.bear@redrocks.org,555-040-0011,IT
+white.eagle,White Eagle,white.eagle@redrocks.org,555-040-0012,HR
+running.antelope,Running Antelope,running.antelope@redrocks.org,555-040-0013,"ADM, IT"
+two.moons,Two Moons,two.moons@redrocks.org,555-040-0014,"IT, HR"
+flying.hawk,Flying Hawk,flying.hawk@redrocks.org,555-040-0015,ENG
+tall.bull,Tall Bull,tall.bull@redrocks.org,555-040-0016,"HR, ENG"
+blue.horse,Blue Horse,blue.horse@redrocks.org,555-040-0017,"ADM, HR, ENG, IT"
+swift.deer,Swift Deer,swift.deer@redrocks.org,555-040-0018,"ENG, ADM"
+iron.shell,Iron Shell,iron.shell@redrocks.org,555-040-0019,ADM
