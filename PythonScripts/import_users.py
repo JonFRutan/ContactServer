@@ -16,7 +16,7 @@ def import_from_csv(file_path):
         reader = csv.DictReader(csv_file)
         import_count = 0;
         for row in reader:
-            tags = [t.strip() for t in row['tags'].split(',')] if row['tags'] else []
+            tags = [t.strip() for t in row['assigned_tags'].split(',')] if row['assigned_tags'] else []
             db_cursor.execute("""
                 insert into users (username, display_name, email, phone, assigned_tags)
                 values (%s, %s, %s, %s, %s)

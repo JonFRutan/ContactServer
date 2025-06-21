@@ -10,7 +10,7 @@ DB_PASSWORD = "test"
 def run():
     try:
         #sees if postgres user exists and if database exists, creates them if they dont
-        db_connection = psycopg2.connect(dbname="postgres", user="postgres", host="localhost")
+        db_connection = psycopg2.connect(dbname="contacts_db", user="contacts_admin", password="test", host="localhost")
         db_connection.autocommit = True
         db_cursor = db_connection.cursor()
 
@@ -21,7 +21,7 @@ def run():
         else:
             print(f"User {DB_USER} exists.")
         
-        db_cursor("select 1 from pg_database where datname = %s", (DB_NAME,))
+        db_cursor.execute("select 1 from pg_database where datname = %s", (DB_NAME,))
         if not db_cursor.fetchone():
             db_cursor.execute(sql.SQL("create database {} owner {}").format(sql.Identifier(DB_NAME), sql.Identifier(DB_USER)))
             print(f"Database {DB_NAME} was created.")
@@ -31,7 +31,7 @@ def run():
         db_cursor.close()
         db_connection.close()
 
-        schema_connection = psycopg2.connect(dbname=DB_NAME, user="postgres", host="localhost")
+        schema_connection = psycopg2.connect(dbname=DB_NAME, user="contacts_admin", password="test", host="localhost")
         schema_cursor = schema_connection.cursor()
         schema_cursor.execute("""
         create table if not exists users (
