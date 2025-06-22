@@ -1,5 +1,5 @@
 VENV := .venv
-ACTIVATE := $(VENV)/bin/activate
 
-install:
-	source $(ACTIVATE) && pip install -r requirements.txt
+setup:
+	Setup/venv_setup.sh
+	$(VENV)/bin/python3 Setup/init_db.py 

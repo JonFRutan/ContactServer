@@ -9,9 +9,8 @@ This avoids the overhead of an all-inclusive service like NextCloud or Mailcow, 
 ## Requirements  
 - **Python**  
 - **PostgreSQL**  
-Python will be managed using a virtual environment.  
+Python libraries will be managed using a virtual environment.  
 
 ## Setup  
-1. **Run venv_setup.sh** - This shell script will create the python environment, activate it, and install necessary libraries.  
-2. **Run `init_db.py`** - This will create a local PostgreSQL database adhering to a predefined schema.  
+In the project root type `make` and the Makefile will set up the virtual environment, install requirements, and run the database initialization script.
 

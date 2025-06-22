@@ -39,8 +39,7 @@ def run():
             username text unique not null,
             display_name text,
             email text,
-            phone text,
-            assigned_tags text[] default '{}'
+            phone text
             );
         
         create table if not exists groups (
@@ -60,6 +59,12 @@ def run():
             group_id integer references groups(id) on delete cascade,
             contact_id integer references contacts(id) on delete cascade,
             primary key (group_id, contact_id)
+        );
+                              
+        create table if not exists group_users (
+            group_id integer references groups(id) on delete cascade,
+            user_id integer references users(id) on delete cascade,
+            primary key (group_id, user_id)
         );
         """)
         schema_connection.commit()
