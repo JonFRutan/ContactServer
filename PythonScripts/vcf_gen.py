@@ -8,24 +8,22 @@ DB = {
     "host": "localhost"
 }
 
-#currently generates based on users table, when it should generate based on contacts table
+#takes all the records found in the contacts table and generates vcards out of them.
 def generate_vcards():
     cards = []
     db_connection = psycopg2.connect(**DB)
     db_cursor = db_connection.cursor()
 
-    db_cursor.execute("""select * from users;""")
+    db_cursor.execute("""select full_name, email, phone, title from contacts;""")
     #the cursor object is iterable, so we can iterate through retrieved records.
-    #[0] for ID, [1] for username, [2] for full name, [3] for email, [4] for phone
-    for record in db_cursor:
-        username, display_name, email, phone = record[1], record[2], record[3], record[4]
+    for full_name, email, phone, title in db_cursor:
         vcard = vobject.vCard()
 
         vcard.add('fn') # full name - 'fn' attribute is required by vobject
-        vcard.fn.value = display_name
+        vcard.fn.value = full_name
 
         vcard.add('n')  # username
-        vcard.n.value = vobject.vcard.Name(family='', given=username)
+        vcard.n.value = vobject.vcard.Name(family='', given=full_name)
 
         email_field = vcard.add('email')
         email_field.value = email
@@ -35,12 +33,17 @@ def generate_vcards():
         tel_field.value = phone
         tel_field.type_param='WORK'
 
+        if title:
+            title_field = vcard.add('title')
+            title_field.value = title
+
         cards.append(vcard)
         vcard.serialize()
         vcard.prettyPrint()
-    return cards
 
     db_connection.commit()
     db_cursor.close()
     db_connection.close()
+    return cards
+
 
