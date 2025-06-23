@@ -1,11 +1,18 @@
 #jfr
-import psycopg2, csv, sys
+import psycopg2, csv, sys, os
+from dotenv import load_dotenv
+
+load_dotenv()
+DB_NAME = os.getenv('DB_NAME')
+DB_USER = os.getenv('DB_USER')
+DB_PASS = os.getenv('DB_PASS')
+DB_HOST = os.getenv('DB_HOST')
 
 DB = {
-    "dbname": "contacts_db",
-    "user": "contacts_admin",
-    "password": "test",
-    "host": "localhost"
+    "dbname": DB_NAME,
+    "user": DB_USER,
+    "password": DB_PASS,
+    "host": DB_HOST
 }
 
 def user_to_contact_sync():

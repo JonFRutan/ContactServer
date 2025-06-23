@@ -1,11 +1,18 @@
 #jfr
-import vobject, psycopg2
+import vobject, psycopg2, os
+from dotenv import load_dotenv
+
+load_dotenv()
+DB_NAME = os.getenv('DB_NAME')
+DB_USER = os.getenv('DB_USER')
+DB_PASS = os.getenv('DB_PASS')
+DB_HOST = os.getenv('DB_HOST')
 
 DB = {
-    "dbname": "contacts_db",
-    "user": "contacts_admin",
-    "password": "test",
-    "host": "localhost"
+    "dbname": DB_NAME,
+    "user": DB_USER,
+    "password": DB_PASS,
+    "host": DB_HOST
 }
 
 #takes all the records found in the contacts table and generates vcards out of them.
@@ -46,4 +53,5 @@ def generate_vcards():
     db_connection.close()
     return cards
 
-
+if __name__ == "__main__":
+    print(DB)

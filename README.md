@@ -12,5 +12,6 @@ This avoids the overhead of an all-inclusive service like NextCloud or Mailcow, 
 Python libraries will be managed using a virtual environment.  
 
 ## Setup  
-In the project root type `make` and the Makefile will set up the virtual environment, install requirements, and run the database initialization script.
-
+In the project root type `make` and the Makefile will set up the virtual environment, install requirements, and run the database initialization script.  
+Within your server you will need to create a contacts_db admin user, remember to give it privileges to your contacts database using the psql command: `grant all privileges on all tables in schema public to contacts_admin`  
+Fill out a local .env file with the needed database and login information.  
