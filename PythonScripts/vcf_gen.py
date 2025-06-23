@@ -15,6 +15,15 @@ DB = {
     "host": DB_HOST
 }
 
+#export vcards into a single file, for use in payload.
+def export_vcards(cards):
+    count = 0
+    with open("contacts.vcf", 'w', encoding='utf-8') as o:
+        for card in cards:
+            o.write(f"{card.prettyPrint()}\nEND:VCARD")
+            count += 1
+    print(f"output.vcf created with {count} vCards.")
+
 #takes all the records found in the contacts table and generates vcards out of them.
 def generate_vcards():
     cards = []
@@ -51,6 +60,9 @@ def generate_vcards():
     db_connection.commit()
     db_cursor.close()
     db_connection.close()
+
+    print("Exporting vcards to output.vcf")
+    export_vcards(cards)
     return cards
 
 if __name__ == "__main__":

@@ -12,6 +12,17 @@ This avoids the overhead of an all-inclusive service like NextCloud or Mailcow, 
 Python libraries will be managed using a virtual environment.  
 
 ## Setup  
+*Note: This is designed to be used with a POSIX system, this will differ on Windows machines.*  
 In the project root type `make` and the Makefile will set up the virtual environment, install requirements, and run the database initialization script.  
-Within your server you will need to create a contacts_db admin user, remember to give it privileges to your contacts database using the psql command: `grant all privileges on all tables in schema public to contacts_admin`  
+Within your server you will need to create a contacts_db admin user, remember to give it privileges to your contacts database using the psql command:  
+ `GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA PUBLIC TO contacts_admin;`  
 Fill out a local .env file with the needed database and login information.  
+
+## Goals    
+1. Structure a database schema for managing users and contacts. **(Done)**   
+2. Take in a CSV and populate our database. **(Done)**   
+3. Using the local contacts table, generate a set of vCard from it. **(Done)**  
+4. Set up an export script to JAMF using the generated vCards.  
+5. Create a Flask frontend for easier access to functionality and data administration.  
+
+
