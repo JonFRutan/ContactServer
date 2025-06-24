@@ -16,13 +16,13 @@ DB = {
 }
 
 #export vcards into a single file, for use in payload.
-def export_vcards(cards):
+def export_vcards(cards, filepath):
     count = 0
-    with open("contacts.vcf", 'w', encoding='utf-8') as o:
+    with open(filepath, 'w', encoding='utf-8') as o:
         for card in cards:
-            o.write(f"{card.prettyPrint()}\nEND:VCARD")
+            o.write(f"{card.serialize()}\nEND:VCARD\n")
             count += 1
-    print(f"output.vcf created with {count} vCards.")
+    print(f"{filepath} created with {count} vCards.")
 
 #takes all the records found in the contacts table and generates vcards out of them.
 def generate_vcards():

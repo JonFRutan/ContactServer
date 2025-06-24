@@ -1,6 +1,6 @@
 #jfr
 #script for connect to psql and intiating db schema
-import psycopg2
+import psycopg2, os
 from dotenv import load_dotenv
 from psycopg2 import sql, errors
 
