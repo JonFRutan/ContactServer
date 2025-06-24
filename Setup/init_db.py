@@ -1,16 +1,20 @@
 #jfr
 #script for connect to psql and intiating db schema
 import psycopg2
+from dotenv import load_dotenv
 from psycopg2 import sql, errors
 
-DB_NAME = "contacts_db"
-DB_USER = "contacts_admin"
-DB_PASSWORD = "test"
+load_dotenv()
+
+DB_NAME = os.getenv('DB_NAME')
+DB_HOST = os.getenv('DB_HOST')
+DB_USER = os.getenv('DB_USER')
+DB_PASS = os.getenv('DB_PASS')
 
 def run():
     try:
         #sees if postgres user exists and if database exists, creates them if they dont
-        db_connection = psycopg2.connect(dbname="contacts_db", user="contacts_admin", password="test", host="localhost")
+        db_connection = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
         db_connection.autocommit = True
         db_cursor = db_connection.cursor()
 
@@ -31,7 +35,7 @@ def run():
         db_cursor.close()
         db_connection.close()
 
-        schema_connection = psycopg2.connect(dbname=DB_NAME, user="contacts_admin", password="test", host="localhost")
+        schema_connection = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
         schema_cursor = schema_connection.cursor()
         schema_cursor.execute("""
         create table if not exists users (
