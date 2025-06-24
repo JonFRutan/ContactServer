@@ -70,6 +70,31 @@ def generate_vcards():
     #export_vcards(cards)
     return cards
 
+def upload_card_to_radicale(session, radicale_url, username, addressbook, vcard):
+    vcard_file = f"{vcard.uid.value}.vcf"
+    contact_url = f"{radicale_url}/{username}/{addressbook}/{vcard_file}"
+    headers = {
+        "Content-Type": "text/vcard"
+    }
+    vcard_content = vcard.serialize()
+    try:
+        response = session.out(contact_url, headers=headers, data=vcard_content)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"Error uploading: {e}")
+
+def upload_all_to_radicale():
+    with requests.Session() as session:
+        session.auth = (RAD_USER, RAD_PASS)
+        cards = generate_vcards()
+        if not cards:
+            print("Error at contact card creation")
+            return
+        for card in cards:
+            upload_card_to_radicale(session, RAD_URLS, RAD_USER, RAD_ADDR, card)
+
+
+"""
 def radicale_vcf_import():
     temp_file = "temp_radicale.vcf"
     vcards = generate_vcards()
@@ -101,6 +126,7 @@ def radicale_vcf_import():
         if os.path.exists(temp_file):
             os.remove(temp_file)
             print(f"Temp file cleaned {temp_file}")
-
+"""
+            
 if __name__ == "__main__":
     print(DB)
