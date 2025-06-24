@@ -78,18 +78,20 @@ def radicale_vcf_import():
         return
     print(f"Generating combined VCF file: {temp_file}")
     export_vcards(vcards, temp_file)
-    radicale_upload = f"{RAD_URLS}/{RAD_USER}/"
+    #FIXME - I put a direct line in here /super so it will overwrite a default address.
+    radicale_upload = f"{RAD_URLS}/{RAD_USER}/{RAD_ADDR}/super.vcf"
     auth = (RAD_USER, RAD_PASS)
+    headers = {
+        "Content-Type": "text/vcard"
+    }
     try:
         with open(temp_file, 'rb') as vcf:
-            files = {'uploadfile': (os.path.basename(vcf.name), vcf, 'text/vcard')}
-            data = {'href': RAD_ADDR}
             print(f"Uploading {temp_file} to Radicale as {RAD_ADDR}")
             response = requests.post(
                 radicale_upload,
                 auth=auth,
-                files=files,
-                data=data
+                headers=headers,
+                data=vcf.read()
             )
             response.raise_for_status()
             print(f"Address Book {RAD_ADDR} created.")
