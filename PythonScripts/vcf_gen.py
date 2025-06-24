@@ -66,8 +66,8 @@ def generate_vcards():
     db_cursor.close()
     db_connection.close()
 
-    print("Exporting vcards to output.vcf")
-    export_vcards(cards)
+    #print("Exporting vcards to output.vcf")
+    #export_vcards(cards)
     return cards
 
 def radicale_vcf_import():
