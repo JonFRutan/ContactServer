@@ -1,3 +1,4 @@
+#jfr
 import os
 from venv import load_dotenv
 
@@ -12,6 +13,9 @@ RAD_USER=os.getenv('RAD_USER')
 RAD_PASS=os.getenv('RAD_PASS')
 RAD_ADDR=os.getenv('RAD_ADDR')
 
+#FIXME - Rename these and combine them into one large dictionary
+#dbuser, dbpass, dbhost, dbname | radhref, raduser, radpass, radaddr
+
 DB = {
     "dbname": DB_NAME,
     "user": DB_USER,
@@ -22,6 +26,6 @@ DB = {
 RAD = {
     "url": RAD_URLS,
     "user": RAD_USER,
-    "passwod": RAD_PASS,
+    "password": RAD_PASS,
     "addressbook": RAD_ADDR 
 }

@@ -1,8 +1,9 @@
 #jfr
-import psycopg2, csv, sys, os
-from dotenv import load_dotenv
+import psycopg2, csv, sys
 from localenv import DB
 
+# For future proofing we currently create user entities out of imported contacts (assuming they're exported from some employee database/spreadsheet)
+# This creates a contact for every person listed in the user table.
 def user_to_contact_sync():
     db_connection = psycopg2.connect(**DB)
     db_cursor = db_connection.cursor()
@@ -31,6 +32,7 @@ def user_to_contact_sync():
     db_connection.close()
     print(f"{synced} users synced into contacts.")
 
+# eventually I'd like this to be a subfunction for when a CSV is provided, not the sole import functionality
 def import_from_csv(file_path):
     db_connection = psycopg2.connect(**DB)
     db_cursor = db_connection.cursor()

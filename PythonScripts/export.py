@@ -1,8 +1,6 @@
 #jfr
-import vobject, psycopg2, os, requests, uuid
+import vobject, psycopg2, requests, uuid
 from localenv import DB, RAD
-from dotenv import load_dotenv
-
 
 #export vcards into a single file, for use in payload.
 def export_vcards(cards, filepath):
@@ -57,7 +55,7 @@ def generate_vcards():
     #export_vcards(cards)
     return cards
 
-#ugly
+#ugly parameters and function name
 def upload_card_to_radicale(session, radicale_url, username, addressbook, vcard):
     vcard_file = f"{vcard.uid.value}.vcf"
     contact_url = f"{radicale_url}/{username}/{addressbook}/{vcard_file}"

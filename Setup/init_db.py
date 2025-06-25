@@ -20,7 +20,7 @@ def run():
 
         db_cursor.execute("select 1 from pg_roles where rolname = %s", (DB_USER,))
         if not db_cursor.fetchone():
-            db_cursor.execute("create user {} with password %s").format(sql.Identifier(DB_USER), [DB_PASSWORD])
+            db_cursor.execute("create user {} with password %s").format(sql.Identifier(DB_USER), [DB_PASS])
             print(f"User {DB_USER} was created.")
         else:
             print(f"User {DB_USER} exists.")

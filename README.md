@@ -1,7 +1,7 @@
 # TotallyRadicale  
-Contact management scripts joining together a PostgreSQL database and a Radicale server.  
+Contact management scripts for joining together a PostgreSQL database and a [Radicale](https://radicale.org/v3.html) server.  
 Included within the project are all necessary Python requirements, which includes Radicale.  
-The ultimate goal is for this to be a "batteries included" CardDAV system eventually allowing for dynamic mass imports, syncing, and JAMF exports. It's far from complete, my first and foremost goal is to curtail it to my use case, and then eventually smooth out the whole process.  
+The ultimate goal is for this to be a "batteries included" CardDAV system eventually allowing for dynamic mass imports, syncing, and Radicale exporting. It's far from complete; my first and foremost goal is to curtail it to my use case, and then eventually smooth out the whole process.  
 
 ## Requirements  
 - **Python**  
