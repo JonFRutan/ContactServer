@@ -1,5 +1,5 @@
 #jfr
-import vobject, psycopg2, os, requests
+import vobject, psycopg2, os, requests, uuid
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -46,6 +46,9 @@ def generate_vcards():
         vcard.add('n')  # username
         vcard.n.value = vobject.vcard.Name(family='', given=full_name)
 
+        uid_field = vcard.add('uid')
+        uid_field.value = str(uuid.uuid4())
+
         email_field = vcard.add('email')
         email_field.value = email
         email_field.type_param = 'INTERNET'
@@ -78,10 +81,16 @@ def upload_card_to_radicale(session, radicale_url, username, addressbook, vcard)
     }
     vcard_content = vcard.serialize()
     try:
-        response = session.out(contact_url, headers=headers, data=vcard_content)
+        response = session.put(contact_url, headers=headers, data=vcard_content)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         print(f"Error uploading: {e}")
+
+def upload_group_to_book(group, addressbook):
+    pass
+    # The idea here is that provided an addressbook and a group, we can select all the contacts pertaining to that group
+    # using the join table group_contacts and push them into a specified addressbook.
+    # these addressbooks for now are manually created on the Radicale interface, like 'super'.
 
 def upload_all_to_radicale():
     with requests.Session() as session:
@@ -92,41 +101,6 @@ def upload_all_to_radicale():
             return
         for card in cards:
             upload_card_to_radicale(session, RAD_URLS, RAD_USER, RAD_ADDR, card)
-
-
-"""
-def radicale_vcf_import():
-    temp_file = "temp_radicale.vcf"
-    vcards = generate_vcards()
-    if not vcards:
-        print("No contacts returned from generate")
-        return
-    print(f"Generating combined VCF file: {temp_file}")
-    export_vcards(vcards, temp_file)
-    #FIXME - I put a direct line in here /super so it will overwrite a default address.
-    radicale_upload = f"{RAD_URLS}/{RAD_USER}/{RAD_ADDR}/super.vcf"
-    auth = (RAD_USER, RAD_PASS)
-    headers = {
-        "Content-Type": "text/vcard"
-    }
-    try:
-        with open(temp_file, 'rb') as vcf:
-            print(f"Uploading {temp_file} to Radicale as {RAD_ADDR}")
-            response = requests.post(
-                radicale_upload,
-                auth=auth,
-                headers=headers,
-                data=vcf.read()
-            )
-            response.raise_for_status()
-            print(f"Address Book {RAD_ADDR} created.")
-    except requests.exceptions.RequestException as e:
-        print(f"Error uploading VCF into Radicale: {e}")
-    finally:
-        if os.path.exists(temp_file):
-            os.remove(temp_file)
-            print(f"Temp file cleaned {temp_file}")
-"""
-            
+         
 if __name__ == "__main__":
     print(DB)
