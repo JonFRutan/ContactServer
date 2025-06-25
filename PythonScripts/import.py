@@ -1,19 +1,7 @@
 #jfr
 import psycopg2, csv, sys, os
 from dotenv import load_dotenv
-
-load_dotenv()
-DB_NAME = os.getenv('DB_NAME')
-DB_USER = os.getenv('DB_USER')
-DB_PASS = os.getenv('DB_PASS')
-DB_HOST = os.getenv('DB_HOST')
-
-DB = {
-    "dbname": DB_NAME,
-    "user": DB_USER,
-    "password": DB_PASS,
-    "host": DB_HOST
-}
+from localenv import DB
 
 def user_to_contact_sync():
     db_connection = psycopg2.connect(**DB)
@@ -49,7 +37,7 @@ def import_from_csv(file_path):
 
     with open(file_path, newline='') as csv_file:
         reader = csv.DictReader(csv_file)
-        import_count = 0;
+        import_count = 0
         for row in reader:
             username = row['username']
             display_name = row['display_name']
@@ -77,7 +65,7 @@ def import_from_csv(file_path):
                     values (%s, %s)
                     on conflict do nothing
                 """, (group_id, user_id))
-            import_count += 1;
+            import_count += 1
         
         db_connection.commit()
         db_cursor.close()
