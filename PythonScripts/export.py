@@ -1,6 +1,6 @@
 #jfr
 import vobject, psycopg2, requests, uuid
-from localenv import DB, RAD
+from PythonScripts.utils import DB, RAD
 
 #export vcards into a single file, for use in payload.
 def export_vcards(cards, filepath):

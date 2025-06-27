@@ -1,6 +1,6 @@
 #jfr
 import psycopg2, csv, sys
-from localenv import DB
+from PythonScripts.utils import DB
 
 # For future proofing we currently create user entities out of imported contacts (assuming they're exported from some employee database/spreadsheet)
 # This creates a contact for every person listed in the user table.
