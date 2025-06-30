@@ -19,11 +19,11 @@ RAD_ADDR=os.getenv('RAD_ADDR')
 #dbuser, dbpass, dbhost, dbname | radhref, raduser, radpass, radaddr
 
 group_ids = {
-    'ADM': 1,
-    'ENG': 2,
-    'HR' : 3,
-    'IT' : 4,
-    'SAF': 5
+    'AD': 1,   #Admin
+    'EN': 2,   #Engineering
+    'HR' : 3,  #Human Resources
+    'IT' : 4,  #Info Tech
+    'SF': 5    #Safety
 }
 
 DB = {

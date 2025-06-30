@@ -87,6 +87,5 @@ def upload_all_to_radicale():
         for card in cards:
             upload_card_to_radicale(session, RAD.url, RAD.password, RAD.addressbook, card) # This is no good
 
-       
 if __name__ == "__main__":
     upload_all_to_radicale()
